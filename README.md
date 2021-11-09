@@ -88,3 +88,6 @@ We always hope that OvenPlayer will make your project a success.
 ## License
 
 OvenPlayer is licensed under the [MIT license](LICENSE).
+
+#
+npm login --scope=@OWNER --registry=https://npm.pkg.github.com
