@@ -225,32 +225,32 @@ export const SYSTEM_TEXT = [
                 },
                 501: {
                     "code": 501,
-                    "message": "Stream offline",
+                    "message": "Stream offline - E01",
                     "reason": "WebSocket connection failed."
                 },
                 502: {
                     "code": 502,
-                    "message": "Stream offline",
+                    "message": "Stream offline - E02",
                     "reason": "WebRTC addIceCandidate failed."
                 },
                 503: {
                     "code": 503,
-                    "message": "Stream offline",
+                    "message": "Stream offline - E03",
                     "reason": "WebRTC setRemoteDescription failed."
                 },
                 504: {
                     "code": 504,
-                    "message": "Stream offline",
+                    "message": "Stream offline - E04",
                     "reason": "WebRTC peer createOffer failed."
                 },
                 505: {
                     "code": 505,
-                    "message": "Stream offline",
+                    "message": "Stream offline - E05",
                     "reason": "WebRTC setLocalDescription failed."
                 },
                 506: {
                     "code": 506,
-                    "message": "Stream offline",
+                    "message": "Stream offline - E06",
                     "reason": "WebRTC internal error."
                 },
                 510: {
