@@ -30,7 +30,7 @@ import {
 import '../../stylesheet/ovenplayer.less';
 
 const View = function($container){
-    let viewTemplate = "", controls = "", helper = "", $playerRoot, contextPanel = "", api = "", autoHideTimer = "", playerState = STATE_IDLE;
+    let viewTemplate = "", controls = "", helper = "", $playerRoot, contextPanel = "", api = null, autoHideTimer = "", playerState = STATE_IDLE;
     let isShiftPressed = false;
     let panelManager = PanelManager();
     let screenSize = "";
@@ -311,6 +311,14 @@ const View = function($container){
     that.setApi = (playerInstance) => {
         api = playerInstance;
 
+        api.getContainerElement = () => {
+            return $playerRoot.get();
+        };
+
+        api.getContainerId = () => {
+            return $playerRoot.get().id;
+        };
+
         api.on(READY, function(data) {
 
             if(!controls){
@@ -358,16 +366,7 @@ const View = function($container){
         let showControlBar = api.getConfig() && api.getConfig().controls;
 
         helper = Helpers($playerRoot.find(".op-ui"), playerInstance);
-        if(showControlBar){
-            controls = Controls($playerRoot.find(".op-ui"), playerInstance);
-        } else {
-
-            // to use full screen api
-            if (api.getConfig() && api.getConfig().expandFullScreenUI) {
-                controls = Controls($playerRoot.find(".op-ui"), playerInstance);
-                controls.destroy();
-            }
-        }
+        controls = Controls($playerRoot.find(".op-ui"), playerInstance);
 
         let aspectRatio = api.getConfig().aspectRatio;
 
