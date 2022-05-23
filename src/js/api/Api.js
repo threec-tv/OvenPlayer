@@ -12,6 +12,7 @@ import {ApiRtmpExpansion} from 'api/ApiExpansions';
 import {analUserAgent} from "utils/browser";
 import {pickCurrentSource} from "api/provider/utils";
 import {version} from "../version";
+import {CONTENT_SOURCE_CHANGED} from "./constants";
 
 /**
  * @brief   This object connects UI to the provider.
@@ -369,7 +370,12 @@ const Api = function(container){
         let lastPlayPosition = currentProvider.getPosition();
         playerConfig.setSourceIndex(index);
 
-        initProvider(lastPlayPosition);
+        initProvider(lastPlayPosition).then(function () {
+
+            that.trigger(CONTENT_SOURCE_CHANGED, {
+                currentSource: index
+            });
+        });
 
         return index;
     };
@@ -479,11 +485,6 @@ const Api = function(container){
         OvenPlayerConsole.log("API : remove() - currentProvider, providerController, playlistManager, playerConfig, api event destroed. ");
         OvenPlayerSDK.removePlayer(that);
 
-    };
-
-    that.getMediaElement = () => {
-
-        return currentProvider.getMediaElement();
     };
 
     that.getMediaElement = () => {

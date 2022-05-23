@@ -29,6 +29,7 @@ import {
     PLAYER_STATE,
     ALL_PLAYLIST_ENDED,
     CONTENT_LEVEL_CHANGED,
+    CONTENT_SOURCE_CHANGED,
     NETWORK_UNSTABLED,
     UI_ICONS
 } from "api/constants";
@@ -76,9 +77,22 @@ const Helpers = function($container, api){
             messageBox = MessageBox($current, api, message, description, withTimer, iconClass, clickCallback, dontClose);
         }
         function createThumbnail(){
+
+            const mediaElement = api.getMediaElement();
+
+            if (mediaElement) {
+                mediaElement.poster = ''
+            }
+
+            if (api.getConfig().image) {
+                mediaElement.poster = api.getConfig().image;
+            }
+
+
             if(thumbnail){
                 thumbnail.destroy();
             }
+
             thumbnail = Thumbnail($current, api, api.getConfig());
         }
         function createWaterMark() {
@@ -187,6 +201,13 @@ const Helpers = function($container, api){
 
             }
         }, template);
+
+        api.on(CONTENT_SOURCE_CHANGED, function () {
+
+            if(hasThumbnail){
+                createThumbnail();  //shows when playlist changed.
+            }
+        });
 
         //show spinner cuz dashjs spends long time for level change.
         api.on(CONTENT_LEVEL_CHANGED, function(data){

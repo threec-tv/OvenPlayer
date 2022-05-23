@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -30,6 +31,7 @@
         fieldset {
             padding-left: 0.5rem;
             padding-bottom: 0.5rem;
+            font-size: 0.85rem;
         }
 
         .list-group-item {
@@ -78,6 +80,10 @@
             width: 100%;
             height: 100%;
         }
+
+        footer {
+            font-size: 0.85rem;
+        }
     </style>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -117,11 +123,12 @@
     <script src="https://cdn.jsdelivr.net/npm/hls.js/dist/hls.min.js"></script>
 
     <!-- dash.js -->
-    <script src="https://cdn.jsdelivr.net/npm/dashjs@3.2.1/dist/dash.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dashjs@3.2.2/dist/dash.all.min.js"></script>
 
     <!-- OvenPlayer -->
-    <script src="https://cdn.jsdelivr.net/npm/ovenplayer/dist/ovenplayer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ovenplayer@0.10.19/dist/ovenplayer.js"></script>
 </head>
+
 <body>
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -148,7 +155,6 @@
                 </ul>
             </div>
         </div>
-
     </nav>
     <div class="container-lg mt-4">
         <ul class="nav nav-pills mb-3">
@@ -157,26 +163,23 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link position-relative" href="demo_input.html" target="_blank">
-                <span>
-                    WebRTC Input
-                </span>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">Beta</span>
+                        <span>
+                            WebRTC Input
+                        </span>
+                    <span
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">Beta</span>
                 </a>
             </li>
         </ul>
-
-
         <div class="row g-3 mb-3">
             <div class="col-12">
                 <div class="input-group">
                     <div class="form-outline flex-grow-1">
-                        <input type="text" id="playbackUrl" class="form-control bg-white"
-                               v-model="source"
+                        <input type="text" id="playbackUrl" class="form-control bg-white" v-model="source"
                                @keyup.enter="addSource"/>
                         <label class="form-label" for="playbackUrl">Playback URL</label>
                     </div>
-                    <button class="btn btn-primary px-2 px-md-4" type="button"
-                            @click="addSource">
+                    <button class="btn btn-primary px-2 px-md-4" type="button" @click="addSource">
                         ADD SOURCE
                     </button>
                 </div>
@@ -184,12 +187,11 @@
             <div class="col-12 col-md-6">
                 <div class="player-area rounded shadow overflow-hidden mb-2">
                     <div class="dummyPlayer d-flex justify-content-center text-center">
-                        <span v-if="playerMessage"
-                              class="text-white position-absolute"
-                              style="left: 1rem; right: 1rem; bottom: 28.125%">
-                            <i class="fas fa-info-circle me-1 text-info"></i>
-                            {{playerMessage}}
-                        </span>
+                            <span v-if="playerMessage" class="text-white position-absolute"
+                                  style="left: 1rem; right: 1rem; bottom: 28.125%">
+                                <i class="fas fa-info-circle me-1 text-info"></i>
+                                {{playerMessage}}
+                            </span>
                     </div>
                     <div class="player-wrapper">
                         <div id="player">
@@ -208,7 +210,7 @@
                     <li class="list-group-item bg-light d-flex justify-content-between align-items-center">
                         <h5 class="mb-0 fs-6">Sources</h5>
                         <small v-if="playerVersion">OvenPlayer
-                            <span class="badge badge-info ms-1">{{playerVersion}}</span>
+                            <span class="badge badge-info ms-1 align-middle">{{playerVersion}}</span>
                         </small>
                     </li>
                     <div class="list-group-item" v-if="playerOption.sources.length === 0">
@@ -216,32 +218,34 @@
 
                         <ul>
                             <li>
-                                <strong>Sub-Second Latency</strong>: WebRTC (Signalling Protocol Conforms to the OME Specification)
+                                <strong>Sub-Second Latency</strong>: WebRTC (Signalling Protocol Conforms to the OME
+                                Specification)
                             </li>
                             <li>
                                 Legacy: MPEG-DASH, HLS
                             </li>
                         </ul>
-                        <p class="mt-4">To play the stream of OvenMediaEngine, please refer to the following documents.</p>
+                        <p class="mt-4">To play the stream of OvenMediaEngine, please refer to the following
+                            documents.</p>
                         <ul class="mb-2">
                             <li>
-                                WebRTC <a href="https://airensoft.gitbook.io/ovenmediaengine/streaming/webrtc-publishing#playback" class="ms-1" target="_blank">
+                                WebRTC <a
+                                    href="https://airensoft.gitbook.io/ovenmediaengine/streaming/webrtc-publishing#playback"
+                                    class="ms-1" target="_blank">
                                 <i class="fas fa-external-link-alt"></i>
                             </a>
                             </li>
                             <li>
-                                Dash& HLS <a href="https://airensoft.gitbook.io/ovenmediaengine/streaming/hls-mpeg-dash#streaming" class="ms-1" target="_blank">
+                                Dash& HLS <a
+                                    href="https://airensoft.gitbook.io/ovenmediaengine/streaming/hls-mpeg-dash#streaming"
+                                    class="ms-1" target="_blank">
                                 <i class="fas fa-external-link-alt"></i>
                             </a>
                             </li>
                         </ul>
                     </div>
-                    <source-item
-                            v-for="(source, index) in playerOption.sources"
-                            :source="source"
-                            :index="index"
-                            @remove-source="removeSource(index)"
-                    >
+                    <source-item v-for="(source, index) in playerOption.sources" :source="source" :index="index"
+                                 @remove-source="removeSource(index)">
                     </source-item>
                 </ul>
             </div>
@@ -256,132 +260,151 @@
                     <li class="list-group-item">
 
                         <div class="row">
-                            <div class="col-lg-4 border-start border-2 mb-3 mb-lg-0">
+                            <div class="col-lg-3 border-start border-2 mb-3 mb-lg-0">
                                 <!--General Config -->
                                 <h6>General Options</h6>
                                 <fieldset>
                                     <div class="form-check">
-                                        <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="autoStart"
-                                                v-model="playerOption.autoStart"
-                                                @change="changeOptions"
-                                        />
+                                        <input class="form-check-input" type="checkbox" value="" id="autoStart"
+                                               v-model="playerOption.autoStart" @change="changeOptions"/>
                                         <label class="form-check-label" for="autoStart">
                                             autoStart
                                         </label>
-                                        <a href="https://airensoft.gitbook.io/ovenplayer/initialization#autostart" class="ms-1" target="_blank">
+                                        <a href="https://airensoft.gitbook.io/ovenplayer/initialization#autostart"
+                                           class="ms-1" target="_blank">
                                             <i class="fas fa-external-link-alt"></i>
                                         </a>
                                     </div>
                                     <div class="form-check">
-                                        <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="autoFallback"
-                                                v-model="playerOption.autoFallback"
-                                                @change="changeOptions"
-                                        />
+                                        <input class="form-check-input" type="checkbox" value="" id="autoFallback"
+                                               v-model="playerOption.autoFallback" @change="changeOptions"/>
                                         <label class="form-check-label" for="autoFallback">
                                             autoFallback
                                         </label>
-                                        <a href="https://airensoft.gitbook.io/ovenplayer/initialization#autofallback" class="ms-1" target="_blank">
+                                        <a href="https://airensoft.gitbook.io/ovenplayer/initialization#autofallback"
+                                           class="ms-1" target="_blank">
                                             <i class="fas fa-external-link-alt"></i>
                                         </a>
                                     </div>
                                     <div class="form-check">
-                                        <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="mute"
-                                                v-model="playerOption.mute"
-                                                @change="changeOptions"
-                                        />
+                                        <input class="form-check-input" type="checkbox" value="" id="mute"
+                                               v-model="playerOption.mute" @change="changeOptions"/>
                                         <label class="form-check-label" for="mute">
                                             mute
                                         </label>
-                                        <a href="https://airensoft.gitbook.io/ovenplayer/initialization#mute" class="ms-1" target="_blank">
+                                        <a href="https://airensoft.gitbook.io/ovenplayer/initialization#mute"
+                                           class="ms-1" target="_blank">
                                             <i class="fas fa-external-link-alt"></i>
                                         </a>
                                     </div>
                                 </fieldset>
                             </div>
-                            <div class="col-lg-4 border-start border-2 mb-3 mb-lg-0">
+                            <div class="col-lg-3 border-start border-2 mb-3 mb-lg-0">
                                 <!--WebRTC Config -->
                                 <h6>WebRTC Options</h6>
                                 <fieldset>
                                     <div class="form-check mb-2">
-                                        <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="reloadOnConnectionTimeoutCheck"
-                                                v-model="reloadOnConnectionTimeoutCheck"
-                                        />
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="reloadOnConnectionTimeoutCheck"
+                                               v-model="reloadOnConnectionTimeoutCheck"/>
                                         <label class="form-check-label" for="reloadOnConnectionTimeoutCheck">
                                             Reload On Connection Timeout
                                         </label>
-                                        <a href="https://airensoft.gitbook.io/ovenplayer/initialization#webrtcconfig.timeoutmaxretry-and-webrtcconfig.connectiontimeout" class="ms-1" target="_blank">
+                                        <a href="https://airensoft.gitbook.io/ovenplayer/initialization#webrtcconfig.timeoutmaxretry-and-webrtcconfig.connectiontimeout"
+                                           class="ms-1" target="_blank">
                                             <i class="fas fa-external-link-alt"></i>
                                         </a>
                                     </div>
                                     <div class="form-outline ms-4 mb-3">
-                                        <input :disabled="!reloadOnConnectionTimeoutCheck" type="number" id="webrtcLoadingTimeout" class="form-control active"
+                                        <input :disabled="!reloadOnConnectionTimeoutCheck" type="number"
+                                               id="webrtcLoadingTimeout" class="form-control active"
                                                v-model="webrtcLoadingTimeout">
-                                        <label class="form-label" for="webrtcLoadingTimeout">Timeout (Millisecond)</label>
+                                        <label class="form-label" for="webrtcLoadingTimeout">Timeout
+                                            (Millisecond)</label>
                                     </div>
                                     <div class="form-outline ms-4">
-                                        <input :disabled="!reloadOnConnectionTimeoutCheck" type="number" id="webrtcLoadingRetryCount" class="form-control active"
+                                        <input :disabled="!reloadOnConnectionTimeoutCheck" type="number"
+                                               id="webrtcLoadingRetryCount" class="form-control active"
                                                v-model="webrtcLoadingRetryCount">
                                         <label class="form-label" for="webrtcLoadingRetryCount">Retry count</label>
                                     </div>
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-check mb-2">
-                                        <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="playoutDelayHintCheck"
-                                                v-model="playoutDelayHintCheck"
-                                        />
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="playoutDelayHintCheck" v-model="playoutDelayHintCheck"/>
                                         <label class="form-check-label" for="playoutDelayHintCheck">
                                             Enable Playout Delay Hint
                                         </label>
-                                        <a href="https://airensoft.gitbook.io/ovenplayer/initialization#webrtcconfig.playoutdelayhint" class="ms-1" target="_blank">
+                                        <a href="https://airensoft.gitbook.io/ovenplayer/initialization#webrtcconfig.playoutdelayhint"
+                                           class="ms-1" target="_blank">
                                             <i class="fas fa-external-link-alt"></i>
                                         </a>
                                     </div>
                                     <div class="form-outline ms-4">
-                                        <input :disabled="!playoutDelayHintCheck" type="number" id="playoutDelayHintInput" class="form-control active"
+                                        <input :disabled="!playoutDelayHintCheck" type="number"
+                                               id="playoutDelayHintInput" class="form-control active"
                                                v-model="playoutDelayHintInput">
                                         <label class="form-label" for="playoutDelayHintInput">Delay (Second)</label>
                                     </div>
                                 </fieldset>
                             </div>
-                            <div class="col-lg-4 border-start border-2 mb-3 mb-lg-0">
-                                <!--LLDash Config -->
-                                <h6>Low-Latency DASH Options</h6>
+                            <div class="col-lg-3 border-start border-2 mb-3 mb-lg-0">
+                                <!--HLS Config -->
+                                <h6>HLS Options</h6>
                                 <fieldset>
                                     <div class="form-check mb-2">
-                                        <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="llDashCheck"
-                                                disabled
-                                        />
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="hlsLiveSyncDurationCheck" v-model="hlsLiveSyncDurationCheck"/>
+                                        <label class="form-check-label" for="hlsLiveSyncDurationCheck">
+                                            Set Target Latency
+                                        </label>
+                                    </div>
+                                    <div class="form-outline ms-4">
+                                        <input :disabled="!hlsLiveSyncDurationCheck" type="number"
+                                               id="hlsLiveSyncDuration" class="form-control"
+                                               :class="playerOption.hlsConfig && playerOption.hlsConfig.liveSyncDuration ? 'active': ''"
+                                               v-model="hlsLiveSyncDuration">
+                                        <label class="form-label" for="hlsLiveSyncDuration">Second</label>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="hlsLiveSyncPlaybackRateCheck"
+                                               v-model="hlsLiveSyncPlaybackRateCheck"/>
+                                        <label class="form-check-label" for="hlsLiveSyncPlaybackRateCheck">
+                                            Set Live Sync Playback Rate
+                                        </label>
+                                    </div>
+                                    <div class="form-outline ms-4">
+                                        <input :disabled="!hlsLiveSyncPlaybackRateCheck" type="number"
+                                               id="hlsLiveSyncPlaybackRate" class="form-control"
+                                               :class="playerOption.hlsConfig && playerOption.hlsConfig.maxLiveSyncPlaybackRate ? 'active': ''"
+                                               v-model="hlsLiveSyncPlaybackRate">
+                                        <label class="form-label" for="hlsLiveSyncPlaybackRate">Min:1, Max2</label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-3 border-start border-2 mb-3 mb-lg-0">
+                                <!--Dash Config -->
+                                <h6>DASH Options</h6>
+                                <fieldset>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="llDashCheck"
+                                               v-model="llDashCheck"/>
                                         <label class="form-check-label" for="llDashCheck">
                                             Enable Low Latency MPEG DASH
                                         </label>
                                     </div>
                                     <div class="form-outline ms-4">
-                                        <input disabled type="number" id="llDashLiveDelayInput" class="form-control">
-                                        <label class="form-label" for="llDashLiveDelayInput">Live Delay (Optional, second)</label>
+                                        <input :disabled="!llDashCheck" type="number" id="llDashLiveDelayInput"
+                                               class="form-control"
+                                               :class="playerOption.lowLatencyMpdLiveDelay ? 'active': ''"
+                                               v-model="llDashLiveDelay">
+                                        <label class="form-label" for="llDashLiveDelayInput">Live Delay (Optional,
+                                            second)</label>
                                     </div>
                                 </fieldset>
                             </div>
@@ -396,22 +419,16 @@
                                 <h6>Reload the player when error occurred</h6>
                                 <fieldset>
                                     <div class="form-check mb-2">
-                                        <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                value=""
-                                                id="autoReload"
-                                                v-model="demoOption.autoReload"
-                                                @change="changeOptions"
-                                        />
+                                        <input class="form-check-input" type="checkbox" value="" id="autoReload"
+                                               v-model="demoOption.autoReload" @change="changeOptions"/>
                                         <label class="form-check-label" for="autoReload">
                                             Enable auto reload
                                         </label>
                                     </div>
                                     <div class="form-outline ms-4">
-                                        <input type="text" id="playerReloadInterval" class="form-control" :class="demoOption.autoReloadInterval ? 'active': ''"
-                                               v-model="demoOption.autoReloadInterval"
-                                               @change="changeOptions">
+                                        <input type="text" id="playerReloadInterval" class="form-control"
+                                               :class="demoOption.autoReloadInterval ? 'active': ''"
+                                               v-model="demoOption.autoReloadInterval" @change="changeOptions">
                                         <label class="form-label" for="playerReloadInterval">
                                             Reload interval (millisecond)
                                         </label>
@@ -428,15 +445,11 @@
                         <h5 class="mb-0 fs-6">Usage</h5>
                     </li>
                     <li class="list-group-item position-relative">
-                        <div v-html="createScriptHTML"
-                             class="my-2 small font-monospace w-100 overflow-auto"
+                        <div v-html="createScriptHTML" class="my-2 small font-monospace w-100 overflow-auto"
                              style="white-space: pre;">
                         </div>
-                        <button
-                                ref="copyCodeButton"
-                                class="btn btn-light text-dark position-absolute px-2 px-md-4"
-                                style="top: 0.5rem; right: 1rem"
-                                :data-clipboard-text="createScript">
+                        <button ref="copyCodeButton" class="btn btn-light text-dark position-absolute px-2 px-md-4"
+                                style="top: 0.5rem; right: 1rem" :data-clipboard-text="createScript">
                             <i class="far fa-copy me-1"></i>COPY
                         </button>
                     </li>
@@ -451,17 +464,11 @@
 
                         <div class="input-group">
                             <div class="form-outline flex-grow-1">
-                                <input type="text"
-                                       id="permanentLinkInput"
-                                       readonly
-                                       class="form-control bg-white"
+                                <input type="text" id="permanentLinkInput" readonly class="form-control bg-white"
                                        v-model="permanentLink"/>
                             </div>
-                            <button id="exportButton"
-                                    ref="exportButton"
-                                    data-clipboard-target="#permanentLinkInput"
-                                    class="btn btn-primary px-2 px-md-4"
-                                    type="button">
+                            <button id="exportButton" ref="exportButton" data-clipboard-target="#permanentLinkInput"
+                                    class="btn btn-primary px-2 px-md-4" type="button">
                                 <i class="far fa-copy me-1"></i>COPY
                             </button>
                         </div>
@@ -484,7 +491,8 @@
                                 Media Technology Expert Group
                             </p>
                             <p>
-                                Our mission is to build a powerful media world by making it easier for everyone to use all the complex and demanding media technologies of the world.
+                                Our mission is to build a powerful media world by making it easier for everyone to
+                                use all the complex and demanding media technologies of the world.
                             </p>
                         </div>
 
@@ -493,16 +501,20 @@
                         <div class="col-md-5 col-lg-2 col-xl-2 mx-auto mt-3">
                             <h6 class="text-uppercase mb-4 font-weight-bold">OPEN SOURCE PROJECTS</h6>
                             <p>
-                                <a class="" target="_blank" href="https://github.com/AirenSoft/OvenMediaEngine">OvenMediaEngine</a>
+                                <a class="" target="_blank"
+                                   href="https://github.com/AirenSoft/OvenMediaEngine">OvenMediaEngine</a>
                             </p>
                             <p>
-                                <a class="" target="_blank" href="https://github.com/AirenSoft/OvenPlayer">OvenPlayer</a>
+                                <a class="" target="_blank"
+                                   href="https://github.com/AirenSoft/OvenPlayer">OvenPlayer</a>
                             </p>
                             <p>
-                                <a class="" target="_blank" href="https://github.com/AirenSoft/OvenLiveKit-Web">OvenLiveKit-Web</a>
+                                <a class="" target="_blank"
+                                   href="https://github.com/AirenSoft/OvenLiveKit-Web">OvenLiveKit-Web</a>
                             </p>
                             <p>
-                                <a class="" target="_blank" href="https://github.com/AirenSoft/OvenSpace">OvenSpace</a>
+                                <a class="" target="_blank"
+                                   href="https://github.com/AirenSoft/OvenSpace">OvenSpace</a>
                             </p>
                         </div>
 
@@ -510,7 +522,8 @@
 
                         <div class="col-md-5 col-lg-3 col-xl-3 mx-auto mt-3">
                             <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-                            <p><i class="fas fa-home mr-3"></i> #1203, Twenty First Valley, 157, Yangpyeong-ro, Yeongdeungpo-gu, Seoul, 07207 Republic of Korea</p>
+                            <p><i class="fas fa-home mr-3"></i> #1203, Twenty First Valley, 157, Yangpyeong-ro,
+                                Yeongdeungpo-gu, Seoul, 07207 Republic of Korea</p>
                             <p><i class="fas fa-envelope mr-3"></i> contact@airensoft.com</p>
                             <p><i class="fas fa-phone mr-3"></i> +82-2-6378-5227</p>
                         </div>
@@ -524,7 +537,7 @@
                     <div class="row d-flex align-items-center">
                         <div class="col-md-7 col-lg-8 text-center text-md-start">
                             <div class="p-3">
-                                © 2021 Copyright:
+                                © 2022 Copyright:
                                 <a class="" href="https://www.airensoft.com">AirenSoft</a>
                                 Co., Ltd. All rights reserved.
                             </div>
@@ -532,34 +545,16 @@
 
                         <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
                             <!-- Facebook -->
-                            <a
-                                    class="btn btn-floating m-1"
-                                    class=""
-                                    role="button"
-                                    target="_blank"
-                                    href="https://www.facebook.com/airensoft/"
-                            ><i class="fab fa-facebook-f"></i
-                            ></a>
+                            <a class="btn btn-floating m-1" class="" role="button" target="_blank"
+                               href="https://www.facebook.com/airensoft/"><i class="fab fa-facebook-f"></i></a>
 
                             <!-- Twitter -->
-                            <a
-                                    class="btn btn-floating m-1"
-                                    class=""
-                                    role="button"
-                                    target="_blank"
-                                    href="https://twitter.com/AirenSoft"
-                            ><i class="fab fa-twitter"></i
-                            ></a>
+                            <a class="btn btn-floating m-1" class="" role="button" target="_blank"
+                               href="https://twitter.com/AirenSoft"><i class="fab fa-twitter"></i></a>
 
                             <!-- Instagram -->
-                            <a
-                                    class="btn btn-floating m-1"
-                                    class=""
-                                    role="button"
-                                    target="_blank"
-                                    href="https://www.instagram.com/airensoft"
-                            ><i class="fab fa-instagram"></i
-                            ></a>
+                            <a class="btn btn-floating m-1" class="" role="button" target="_blank"
+                               href="https://www.instagram.com/airensoft"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </section>
@@ -945,6 +940,208 @@
                     this.unLoadPlayer(true);
                     this.makePermanentLink();
                 }
+            },
+            llDashCheck: {
+                get: function () {
+
+                    let value = false;
+
+                    if (this.playerOption &&
+                        this.playerOption.sources) {
+
+                        _.each(this.playerOption.sources, function (source) {
+
+                            if (source.type === 'dash' && source.lowLatency === true) {
+
+                                value = true;
+                                return;
+                            }
+                        });
+                    }
+
+                    return value;
+                },
+                set: function (value) {
+
+                    if (this.playerOption &&
+                        this.playerOption.sources) {
+
+                        _.each(this.playerOption.sources, function (source) {
+
+                            if (source.type === 'dash') {
+
+                                if (value) {
+                                    source.lowLatency = true;
+                                } else {
+                                    delete source.lowLatency;
+                                }
+                            }
+                        });
+
+                        if (!value) {
+
+                            if (this.playerOption.lowLatencyMpdLiveDelay) {
+
+                                delete this.playerOption.lowLatencyMpdLiveDelay;
+                            }
+                        }
+
+                        this.unLoadPlayer(true);
+                        this.makePermanentLink();
+                    }
+                }
+            },
+            llDashLiveDelay: {
+                get: function () {
+
+                    if (this.playerOption.lowLatencyMpdLiveDelay &&
+                        _.isNumber(this.playerOption.lowLatencyMpdLiveDelay)) {
+
+                        return this.playerOption.lowLatencyMpdLiveDelay;
+                    }
+                },
+                set: function (value) {
+
+                    if (value) {
+
+                        this.playerOption.lowLatencyMpdLiveDelay = value;
+
+                    } else {
+
+                        delete this.playerOption.lowLatencyMpdLiveDelay;
+                    }
+
+                    this.unLoadPlayer(true);
+                    this.makePermanentLink();
+                }
+            },
+            hlsLiveSyncDurationCheck: {
+                get: function () {
+
+                    if (this.playerOption.hlsConfig &&
+                        _.isNumber(this.playerOption.hlsConfig.liveSyncDuration)) {
+
+                        return true;
+                    } else {
+                        return false;
+                    }
+                },
+                set: function (value) {
+
+                    if (value) {
+
+                        if (!this.playerOption.hlsConfig) {
+                            this.playerOption.hlsConfig = {};
+                        }
+
+                        this.playerOption.hlsConfig.liveSyncDuration = 3;
+
+                    } else {
+
+                        delete this.playerOption.hlsConfig.liveSyncDuration;
+                    }
+
+                    if (_.isEmpty(this.playerOption.hlsConfig)) {
+
+                        delete this.playerOption.hlsConfig;
+                    }
+
+
+                    this.unLoadPlayer(true);
+                    this.makePermanentLink();
+                }
+            },
+            hlsLiveSyncDuration: {
+                get: function () {
+
+                    if (this.playerOption.hlsConfig &&
+                        _.isNumber(this.playerOption.hlsConfig.liveSyncDuration)) {
+
+                        return this.playerOption.hlsConfig.liveSyncDuration;
+                    }
+                },
+                set: function (value) {
+
+                    if (value) {
+
+                        if (!this.playerOption.hlsConfig) {
+                            this.playerOption.hlsConfig = {};
+                        }
+
+                        this.playerOption.hlsConfig.liveSyncDuration = value;
+
+                    } else {
+
+                        delete this.playerOption.hlsConfig.liveSyncDuration;
+                    }
+
+                    this.unLoadPlayer(true);
+                    this.makePermanentLink();
+                }
+            },
+            hlsLiveSyncPlaybackRateCheck: {
+                get: function () {
+
+                    if (this.playerOption.hlsConfig &&
+                        _.isNumber(this.playerOption.hlsConfig.maxLiveSyncPlaybackRate)) {
+
+                        return true;
+                    } else {
+                        return false;
+                    }
+                },
+                set: function (value) {
+
+                    if (value) {
+
+                        if (!this.playerOption.hlsConfig) {
+                            this.playerOption.hlsConfig = {};
+                        }
+
+                        this.playerOption.hlsConfig.maxLiveSyncPlaybackRate = 1.2;
+
+                    } else {
+
+                        delete this.playerOption.hlsConfig.maxLiveSyncPlaybackRate;
+                    }
+
+                    if (_.isEmpty(this.playerOption.hlsConfig)) {
+
+                        delete this.playerOption.hlsConfig;
+                    }
+
+
+                    this.unLoadPlayer(true);
+                    this.makePermanentLink();
+                }
+            },
+            hlsLiveSyncPlaybackRate: {
+                get: function () {
+
+                    if (this.playerOption.hlsConfig &&
+                        _.isNumber(this.playerOption.hlsConfig.maxLiveSyncPlaybackRate)) {
+
+                        return this.playerOption.hlsConfig.maxLiveSyncPlaybackRate;
+                    }
+                },
+                set: function (value) {
+
+                    if (value) {
+
+                        if (!this.playerOption.hlsConfig) {
+                            this.playerOption.hlsConfig = {};
+                        }
+
+                        this.playerOption.hlsConfig.maxLiveSyncPlaybackRate = value;
+
+                    } else {
+
+                        delete this.playerOption.hlsConfig.maxLiveSyncPlaybackRate;
+                    }
+
+                    this.unLoadPlayer(true);
+                    this.makePermanentLink();
+                }
             }
         },
         mounted: function () {
@@ -979,3 +1176,6 @@
 </body>
 
 </html>
+=======
+</html>
+>>>>>>> 64af6fb6f8348d88cf80790de500fdb4ecdb52d1
